@@ -1,23 +1,27 @@
 import React from 'react';
+import { Routes, Route, Navigate } from 'react-router-dom';
+import MainPage from '../../diploma/src/pages/MainPage';
+import ArtistPage from '../../diploma/src/pages/ArtistPage';
+import Footer from '../../diploma/src/components/Footer';
 
-// function App() {
-//   return (
-//     <div className="App">
-//       <header className="App-header">
-//         <p>
-//           Edit <code>src/App.tsx</code> and save to reload.
-//         </p>
-//         <a
-//           className="App-link"
-//           href="https://reactjs.org"
-//           target="_blank"
-//           rel="noopener noreferrer"
-//         >
-//           Learn React
-//         </a>
-//       </header>
-//     </div>
-//   );
-// }
+/**
+ * Главный компонент приложения, отвечает за роутинг и базовый layout.
+ */
+const App: React.FC = () => {
+  return (
+    <div className="app-root" style={{ minHeight: '100vh', display: 'flex', flexDirection: 'column' }}>
+      {/* Можно добавить header, если нужно */}
+      <main style={{ flex: 1 }}>
+        <Routes>
+          <Route path="/" element={<MainPage />} />
+          <Route path="/artist/:name" element={<ArtistPage />} />
+          {/* Если понадобится страница трека — можно добавить */}
+          <Route path="*" element={<Navigate to="/" replace />} />
+        </Routes>
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
-// export default App;
+export default App;
